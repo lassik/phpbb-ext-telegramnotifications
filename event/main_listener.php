@@ -1,64 +1,93 @@
 <?php
 /**
-*
-* @package phpBB Extension - Acme Demo
-* @copyright (c) 2013 phpBB Group
-* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
-*
-*/
+ *
+ * @package phpBB Extension - Acme Demo
+ * @copyright (c) 2013 phpBB Group
+ * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+ *
+ */
 
 namespace acme\demo\event;
 
 /**
-* @ignore
-*/
+ * @ignore
+ */
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
-* Event listener
-*/
+ * Event listener
+ */
 class main_listener implements EventSubscriberInterface
 {
-	static public function getSubscribedEvents()
-	{
-		return array(
-			'core.user_setup'	=> 'load_language_on_setup',
-			'core.page_header'	=> 'add_page_header_link',
-		);
-	}
+    static public function getSubscribedEvents()
+    {
+        return array(
+            'core.submit_post_end' => 'handle_submit_post_end',
+        );
+    }
 
-	/* @var \phpbb\controller\helper */
-	protected $helper;
+    /* @var \phpbb\controller\helper */
+    protected $helper;
 
-	/* @var \phpbb\template\template */
-	protected $template;
+    /* @var \phpbb\template\template */
+    protected $template;
 
-	/**
-	* Constructor
-	*
-	* @param \phpbb\controller\helper	$helper		Controller helper object
-	* @param \phpbb\template\template	$template	Template object
-	*/
-	public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template)
-	{
-		$this->helper = $helper;
-		$this->template = $template;
-	}
+    /**
+     * Constructor
+     *
+     * @param \phpbb\controller\helper   $helper     Controller helper object
+     * @param \phpbb\template\template   $template   Template object
+     */
+    public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template)
+    {
+        $this->helper = $helper;
+        $this->template = $template;
+    }
 
-	public function load_language_on_setup($event)
-	{
-		$lang_set_ext = $event['lang_set_ext'];
-		$lang_set_ext[] = array(
-			'ext_name' => 'acme/demo',
-			'lang_set' => 'common',
-		);
-		$event['lang_set_ext'] = $lang_set_ext;
-	}
+    /**
+     * @param Event $event
+     */
+    public function handle_submit_post_end($event)
+    {
+        $mode = $event['mode'];
+        if ($mode == 'edit')
+            return;
 
-	public function add_page_header_link($event)
-	{
-		$this->template->assign_vars(array(
-			'U_DEMO_PAGE'	=> $this->helper->route('acme_demo_controller', array('name' => 'world')),
-		));
-	}
+        if ($mode === 'post') {
+            $prefix = '';
+        } else if ($mode === 'reply') {
+            $prefix = 'Re: ';
+        } else {
+            $prefix = ucfirst($mode).': ';
+        }
+
+        $f = $event['data']['forum_id'];
+        $t = $event['data']['topic_id'];
+        $p = $event['data']['post_id'];
+        $url = generate_board_url().'/viewtopic.php?f='.$f.'&t='.$t.'&p='.$p.'#p'.$p;
+        //$url = $event['url'];
+
+        $title = $event['data']['topic_title'];
+        $user = $event['username'];
+        $message = '['.$user.'] '.$prefix.$title.'. '.$url;
+        $this->sendMessageAsTelegramBot($message);
+    }
+
+    private function sendMessageAsTelegramBot($text) {
+        $bot = 'bot'.$this->TELEGRAM_BOT_AUTH_TOKEN;
+        $url = 'https://api.telegram.org/'.urlencode($bot).'/sendMessage';
+        $data = array('chat_id' => $this->TELEGRAM_BOT_CHAT_ID, 'text' => $text);
+        $curl = curl_init($url);
+        //curl_setopt($curl, CURLOPT_VERBOSE, 1);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 10);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, false);
+        $response = curl_exec($curl);
+        curl_close($curl);
+        return $response;
+    }
+
+    private $TELEGRAM_BOT_AUTH_TOKEN = 'fill_me_in';
+    private $TELEGRAM_BOT_CHAT_ID = 'fill_me_in';
 }

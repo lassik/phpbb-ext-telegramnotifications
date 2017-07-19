@@ -1,27 +1,44 @@
-# phpBB 3.1 Extension - Acme Demo
+# phpBB 3.2 Extension - Telegram notifications #
+
+> Things are moving so fast in my head that I'm starting to
+edit... like a telegram.
+
+## What is this?
+
+This is a phpBB extension that sends a message to any Telegram chat
+(group chat or private chat) via a Telegram bot whenever someone makes
+a new topic or replies to an existing topic on the phpBB forum.
+
+## History
+
+The code is based off
+of
+[phpbb/phpbb-ext-acme-demo](https://github.com/phpbb/phpbb-ext-acme-demo) and
+[haivala/phpBB-Entropy-Extension](https://github.com/haivala/phpBB-Entropy-Extension) (a
+similar extension for Slack notifications).
 
 ## Installation
 
-Clone into phpBB/ext/acme/demo:
+Make your own Telegram bot.
 
-    $ git clone https://github.com/phpbb/phpbb-ext-acme-demo.git phpBB/ext/acme/demo
+Clone this Git repository into `phpBB/ext/acme/demo` (yes, the name is
+still `acme/demo`):
 
-Go to "ACP" > "Customise" > "Extensions" and enable the "Acme Demo Extension" extension.
+    $ git clone https://github.com/lassik/phpbb-ext-telegram-notifications.git phpBB/ext/acme/demo
 
-## Tests and Continuous Integration
+Manually fill in the constants at the end of the source file `event/main_listener.php`:
 
-We use Travis-CI as a continous integration server and phpunit for our unit testing. See more information on the [phpBB development wiki](https://wiki.phpbb.com/Unit_Tests).
-To run the tests locally, you need to install phpBB from its Git repository. Afterwards run the following command from the phpBB Git repository's root:
+* `$TELEGRAM_BOT_AUTH_TOKEN`
+* `$TELEGRAM_BOT_CHAT_ID`
 
-Windows:
+You get the auth token when you make the bot. To get the chat ID,
+see
+<https://stackoverflow.com/questions/32423837/telegram-bot-how-to-get-a-group-chat-id>.
 
-    phpBB\vendor\bin\phpunit.bat -c phpBB\ext\acme\demo\phpunit.xml.dist
+In phpBB, go to "ACP" > "Customise" > "Extensions" and enable the
+"Acme Demo Extension" extension.
 
-others:
-
-    phpBB/vendor/bin/phpunit -c phpBB/ext/acme/demo/phpunit.xml.dist
-
-[![Build Status](https://travis-ci.org/phpbb/phpbb-ext-acme-demo.svg?branch=master)](https://travis-ci.org/phpbb/phpbb-ext-acme-demo)
+Now try to make new posts and see if you get notified on Telegram!
 
 ## License
 
