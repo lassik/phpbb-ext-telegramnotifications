@@ -50,23 +50,25 @@ class main_listener implements EventSubscriberInterface
     public function handle_submit_post_end($event)
     {
         $mode = $event['mode'];
-        if ($mode == 'edit')
+        if ($mode === 'edit')
             return;
-
-        if ($mode === 'post') {
-            $prefix = '';
-        } else if ($mode === 'reply') {
-            $prefix = 'Re: ';
-        } else {
-            $prefix = ucfirst($mode).': ';
-        }
-
         $url = generate_board_url().'/'.
              preg_replace('/^.\//', '', html_entity_decode($event['url']));
         $title = html_entity_decode($event['data']['topic_title']);
         $user = $event['username'];
+        $prefix = $this->prefix_from_mode($mode);
         $message = '['.$user.'] '.$prefix.$title.'. '.$url;
         $this->sendMessageAsTelegramBot($message);
+    }
+
+    private function prefix_from_mode($mode) {
+        if ($mode === 'post') {
+            return '';
+        } else if ($mode === 'reply') {
+            return 'Re: ';
+        } else {
+            return ucfirst($mode).': ';
+        }
     }
 
     private function sendMessageAsTelegramBot($text) {
