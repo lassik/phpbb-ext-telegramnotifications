@@ -67,7 +67,7 @@ class main_listener implements EventSubscriberInterface
         $url = generate_board_url().'/viewtopic.php?f='.$f.'&t='.$t.'&p='.$p.'#p'.$p;
         //$url = $event['url'];
 
-        $title = $event['data']['topic_title'];
+        $title = html_entity_decode($event['data']['topic_title']);
         $user = $event['username'];
         $message = '['.$user.'] '.$prefix.$title.'. '.$url;
         $this->sendMessageAsTelegramBot($message);
