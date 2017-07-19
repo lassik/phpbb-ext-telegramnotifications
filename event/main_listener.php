@@ -52,11 +52,11 @@ class main_listener implements EventSubscriberInterface
         $mode = $event['mode'];
         if ($mode === 'edit')
             return;
-        $url = generate_board_url().'/'.
-             preg_replace('/^.\//', '', html_entity_decode($event['url']));
-        $title = html_entity_decode($event['data']['topic_title']);
         $user = $event['username'];
         $prefix = $this->prefix_from_mode($mode);
+        $title = html_entity_decode($event['data']['topic_title']);
+        $url = generate_board_url().'/'.
+             preg_replace('/^.\//', '', html_entity_decode($event['url']));
         $message = '['.$user.'] '.$prefix.$title.'. '.$url;
         $this->sendMessageAsTelegramBot($message);
     }
