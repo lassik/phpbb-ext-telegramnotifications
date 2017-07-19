@@ -58,7 +58,7 @@ class main_listener implements EventSubscriberInterface
         $url = generate_board_url().'/'.
              preg_replace('/^.\//', '', html_entity_decode($event['url']));
         $message = '['.$user.'] '.$prefix.$title.'. '.$url;
-        $this->sendMessageAsTelegramBot($message);
+        $this->send_message_as_telegram_bot($message);
     }
 
     private function prefix_from_mode($mode) {
@@ -71,7 +71,7 @@ class main_listener implements EventSubscriberInterface
         }
     }
 
-    private function sendMessageAsTelegramBot($text) {
+    private function send_message_as_telegram_bot($text) {
         $bot = 'bot'.$this->TELEGRAM_BOT_AUTH_TOKEN;
         $url = 'https://api.telegram.org/'.urlencode($bot).'/sendMessage';
         $data = array('chat_id' => $this->TELEGRAM_BOT_CHAT_ID, 'text' => $text);
