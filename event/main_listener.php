@@ -81,9 +81,8 @@ class main_listener implements EventSubscriberInterface
         curl_setopt($curl, CURLOPT_POST, true);
         curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, false);
-        $response = curl_exec($curl);
+        curl_exec($curl);
         curl_close($curl);
-        return $response;
     }
 
     private $TELEGRAM_BOT_AUTH_TOKEN = 'fill_me_in';
