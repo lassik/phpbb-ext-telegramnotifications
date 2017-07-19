@@ -61,12 +61,8 @@ class main_listener implements EventSubscriberInterface
             $prefix = ucfirst($mode).': ';
         }
 
-        $f = $event['data']['forum_id'];
-        $t = $event['data']['topic_id'];
-        $p = $event['data']['post_id'];
-        $url = generate_board_url().'/viewtopic.php?f='.$f.'&t='.$t.'&p='.$p.'#p'.$p;
-        //$url = $event['url'];
-
+        $url = generate_board_url().'/'.
+             preg_replace('/^.\//', '', html_entity_decode($event['url']));
         $title = html_entity_decode($event['data']['topic_title']);
         $user = $event['username'];
         $message = '['.$user.'] '.$prefix.$title.'. '.$url;
