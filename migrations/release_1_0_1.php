@@ -1,24 +1,26 @@
 <?php
 /**
 *
-* @package phpBB Extension - Acme Demo
-* @copyright (c) 2013 phpBB Group
+* @package phpBB extension - Telegram notifications
+* @copyright (c) 2017 Lassi Kortela
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
 
-namespace acme\demo\migrations;
+namespace lassik\telegramnotifications\migrations;
 
 class release_1_0_1 extends \phpbb\db\migration\migration
 {
 	public function effectively_installed()
 	{
-		return $this->db_tools->sql_column_exists($this->table_prefix . 'users', 'user_acme');
+		return $this->db_tools->sql_column_exists(
+            $this->table_prefix . 'users',
+            'user_lassik_telegramnotif');
 	}
 
 	static public function depends_on()
 	{
-		return array('\acme\demo\migrations\release_1_0_0');
+		return array('\lassik\telegramnotifications\migrations\release_1_0_0');
 	}
 
 	public function update_schema()
@@ -33,9 +35,9 @@ class release_1_0_1 extends \phpbb\db\migration\migration
 					'PRIMARY_KEY'	=> 'acme_id',
 				),
 			),
-			'add_columns'	=> array(
-				$this->table_prefix . 'users'			=> array(
-					'user_acme'				=> array('UINT', 0),
+			'add_columns' => array(
+				$this->table_prefix . 'users' => array(
+					'user_lassik_telegramnotif' => array('UINT', 0),
 				),
 			),
 		);
@@ -44,9 +46,9 @@ class release_1_0_1 extends \phpbb\db\migration\migration
 	public function revert_schema()
 	{
 		return array(
-			'drop_columns'	=> array(
-				$this->table_prefix . 'users'			=> array(
-					'user_acme',
+			'drop_columns' => array(
+				$this->table_prefix . 'users' => array(
+					'user_lassik_telegramnotif',
 				),
 			),
 			'drop_tables'		=> array(

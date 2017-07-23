@@ -1,15 +1,7 @@
 services:
-    acme.demo.controller:
-        class: acme\demo\controller\main
+    lassik.telegramnotifications.listener:
+        class: lassik\telegramnotifications\event\main_listener
         arguments:
             - '@config'
-            - '@controller.helper'
-            - '@template'
-            - '@user'
-    acme.demo.listener:
-        class: acme\demo\event\main_listener
-        arguments:
-            - '@controller.helper'
-            - '@template'
         tags:
             - { name: event.listener }

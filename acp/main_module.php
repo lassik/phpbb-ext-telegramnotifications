@@ -1,13 +1,13 @@
 <?php
 /**
 *
-* @package phpBB Extension - Acme Demo
-* @copyright (c) 2013 phpBB Group
+* @package phpBB extension - Telegram notifications
+* @copyright (c) 2017 Lassi Kortela
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
 
-namespace acme\demo\acp;
+namespace lassik\telegramnotifications\acp;
 
 class main_module
 {
@@ -20,11 +20,11 @@ class main_module
 		$user->add_lang('acp/common');
 		$this->tpl_name = 'demo_body';
 		$this->page_title = $user->lang('ACP_DEMO_TITLE');
-		add_form_key('acme/demo');
+		add_form_key('lassik/telegram_notifications');
 
 		if ($request->is_set_post('submit'))
 		{
-			if (!check_form_key('acme/demo'))
+			if (!check_form_key('lassik/telegram_notifications'))
 			{
 				trigger_error('FORM_INVALID');
 			}

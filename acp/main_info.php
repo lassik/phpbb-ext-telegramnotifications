@@ -1,26 +1,26 @@
 <?php
 /**
 *
-* @package phpBB Extension - Acme Demo
-* @copyright (c) 2013 phpBB Group
+* @package phpBB extension - Telegram notifications
+* @copyright (c) 2017 Lassi Kortela
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
 
-namespace acme\demo\acp;
+namespace lassik\telegramnotifications\acp;
 
 class main_info
 {
 	function module()
 	{
 		return array(
-			'filename'	=> '\acme\demo\acp\main_module',
-			'title'		=> 'ACP_DEMO_TITLE',
+			'filename'	=> '\lassik\telegramnotifications\acp\main_module',
+			'title'		=> 'TELEGRAM NOTIFICATIONS',
 			'modes'		=> array(
-				'settings'	=> array(
-					'title'	=> 'ACP_DEMO',
-					'auth'	=> 'ext_acme/demo && acl_a_board',
-					'cat'	=> array('ACP_DEMO_TITLE')
+				'main'	=> array(
+					'title'	=> 'Telegram IDs',
+					'auth'	=> 'ext_lassik/telegramnotifications && acl_a_board',
+					'cat'	=> array('TELEGRAM NOTIFICATIONS')
 				),
 			),
 		);

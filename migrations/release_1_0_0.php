@@ -1,13 +1,13 @@
 <?php
 /**
 *
-* @package phpBB Extension - Acme Demo
-* @copyright (c) 2013 phpBB Group
+* @package phpBB extension - Telegram notifications
+* @copyright (c) 2017 Lassi Kortela
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
 
-namespace acme\demo\migrations;
+namespace lassik\telegramnotifications\migrations;
 
 class release_1_0_0 extends \phpbb\db\migration\migration
 {
@@ -29,14 +29,14 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 			array('module.add', array(
 				'acp',
 				'ACP_CAT_DOT_MODS',
-				'ACP_DEMO_TITLE'
+				'ACP_TELEGRAM_NOTIFICATIONS'
 			)),
 			array('module.add', array(
 				'acp',
-				'ACP_DEMO_TITLE',
+				'ACP_TELEGRAM_NOTIFICATIONS',
 				array(
-					'module_basename'	=> '\acme\demo\acp\main_module',
-					'modes'				=> array('settings'),
+					'module_basename' => '\lassik\telegramnotifications\acp\main_module',
+					'modes' => array('settings'),
 				),
 			)),
 		);

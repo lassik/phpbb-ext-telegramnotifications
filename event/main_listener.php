@@ -1,13 +1,13 @@
 <?php
 /**
  *
- * @package phpBB Extension - Acme Demo
- * @copyright (c) 2013 phpBB Group
+ * @package phpBB extension - Telegram notifications
+ * @copyright (c) 2017 Lassi Kortela
  * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
  *
  */
 
-namespace acme\demo\event;
+namespace lassik\telegramnotifications\event;
 
 /**
  * @ignore

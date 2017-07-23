@@ -1,28 +1,28 @@
 {
-	"name": "acme/demo",
+	"name": "lassik/telegramnotifications",
 	"type": "phpbb-extension",
-	"description": "Acme Demo Extension for phpBB 3.1",
-	"homepage": "https://github.com/phpbb/phpbb-ext-acme-demo",
+	"description": "Notify on Telegram whenever someone posts on phpBB",
+	"homepage": "https://github.com/lassik/phpbb-ext-telegram-notifications",
 	"version": "0.1.0",
-	"time": "2013-11-05",
+	"time": "2017-07-25",
 	"license": "GPL-2.0",
 	"authors": [{
-			"name": "Joas Schilling",
-			"email": "nickvergessen@gmx.de",
-			"homepage": "https://github.com/nickvergessen/",
+			"name": "Lassi Kortela",
+			"email": "lassi@lassi.io",
+			"homepage": "http://lassi.io/",
 			"role": "Lead Developer"
 		}],
 	"require": {
-		"php": ">=5.3.3",
+		"php": ">=5.4.0",
 		"composer/installers": "~1.0"
 	},
 	"require-dev": {
 		"phpbb/epv": "dev-master"
 	},
 	"extra": {
-		"display-name": "Acme Demo Extension",
+		"display-name": "Telegram Notifications",
 		"soft-require": {
-			"phpbb/phpbb": ">=3.1.0-RC2,<3.2@dev"
+			"phpbb/phpbb": "~3.2"
 		}
 	}
 }

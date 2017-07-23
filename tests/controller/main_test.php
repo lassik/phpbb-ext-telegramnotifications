@@ -1,13 +1,13 @@
 <?php
 /**
 *
-* @package phpBB Extension - Acme Demo
-* @copyright (c) 2014 phpBB Group
+* @package phpBB extension - Telegram notifications
+* @copyright (c) 2017 Lassi Kortela
 * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
 *
 */
 
-namespace acme\demo\tests\controller;
+namespace lassik\telegram_notifications\tests\controller;
 
 class main_test extends \phpbb_test_case
 {
@@ -45,7 +45,7 @@ class main_test extends \phpbb_test_case
 			});
 
 		// Instantiate the acme demo controller
-		$controller = new \acme\demo\controller\main(
+		$controller = new \lassik\telegram_notifications\controller\main(
 			new \phpbb\config\config(array()),
 			$controller_helper,
 			$template,
