@@ -13,18 +13,20 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 {
 	public function effectively_installed()
 	{
-		return isset($this->config['acme_demo_goodbye']);
+		return (isset($this->config['lassik_telegram_bot_auth_token']) &&
+                isset($this->config['lassik_telegram_chat_id']));
 	}
 
 	static public function depends_on()
 	{
-		return array('\phpbb\db\migration\data\v310\alpha2');
+		return array('\phpbb\db\migration\data\v320\v320');
 	}
 
 	public function update_data()
 	{
 		return array(
-			array('config.add', array('acme_demo_goodbye', 0)),
+			array('config.add', array('lassik_telegram_bot_auth_token', '')),
+			array('config.add', array('lassik_telegram_chat_id', '')),
 
 			array('module.add', array(
 				'acp',

@@ -27,21 +27,16 @@ class main_listener implements EventSubscriberInterface
     }
 
     /* @var \phpbb\controller\helper */
-    protected $helper;
-
-    /* @var \phpbb\template\template */
-    protected $template;
+    protected $config;
 
     /**
      * Constructor
      *
-     * @param \phpbb\controller\helper   $helper     Controller helper object
-     * @param \phpbb\template\template   $template   Template object
+     * @param \phpbb\config\config  $config  Configuration object
      */
-    public function __construct(\phpbb\controller\helper $helper, \phpbb\template\template $template)
+    public function __construct(\phpbb\config\config $config)
     {
-        $this->helper = $helper;
-        $this->template = $template;
+        $this->config = $config;
     }
 
     /**
@@ -72,9 +67,10 @@ class main_listener implements EventSubscriberInterface
     }
 
     private function send_message_as_telegram_bot($text) {
-        $bot = 'bot'.$this->TELEGRAM_BOT_AUTH_TOKEN;
+        $bot = 'bot'.$this->config['lassik_telegram_bot_auth_token'];
         $url = 'https://api.telegram.org/'.urlencode($bot).'/sendMessage';
-        $data = array('chat_id' => $this->TELEGRAM_BOT_CHAT_ID, 'text' => $text);
+        $data = array('chat_id' => $this->config['lassik_telegram_chat_id'],
+                      'text' => $text);
         $curl = curl_init($url);
         //curl_setopt($curl, CURLOPT_VERBOSE, 1);
         curl_setopt($curl, CURLOPT_TIMEOUT, 10);
@@ -84,7 +80,4 @@ class main_listener implements EventSubscriberInterface
         curl_exec($curl);
         curl_close($curl);
     }
-
-    private $TELEGRAM_BOT_AUTH_TOKEN = 'fill_me_in';
-    private $TELEGRAM_BOT_CHAT_ID = 'fill_me_in';
 }
