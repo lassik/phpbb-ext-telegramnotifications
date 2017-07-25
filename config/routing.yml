@@ -1,3 +1,0 @@
-acme_demo_controller:
-    path: /demo/{name}
-    defaults: { _controller: acme.demo.controller:handle }
