@@ -65,10 +65,12 @@ class main_listener implements EventSubscriberInterface
     }
 
     private function send_message_as_telegram_bot($text) {
-        $bot = 'bot'.$this->config['lassik_telegram_bot_auth_token'];
-        $url = 'https://api.telegram.org/'.urlencode($bot).'/sendMessage';
-        $data = array('chat_id' => $this->config['lassik_telegram_chat_id'],
-                      'text' => $text);
+        $auth = $this->config['lassik_telegram_bot_auth_token'];
+        $chat_id = $this->config['lassik_telegram_chat_id'];
+        if (empty($auth) || empty($chat_id))
+            return;
+        $url = 'https://api.telegram.org/bot'.urlencode($auth).'/sendMessage';
+        $data = array('chat_id' => $chat_id, 'text' => $text);
         $curl = curl_init($url);
         //curl_setopt($curl, CURLOPT_VERBOSE, 1);
         curl_setopt($curl, CURLOPT_TIMEOUT, 10);
