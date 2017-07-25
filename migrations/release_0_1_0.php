@@ -9,7 +9,7 @@
 
 namespace lassik\telegramnotifications\migrations;
 
-class release_1_0_0 extends \phpbb\db\migration\migration
+class release_0_1_0 extends \phpbb\db\migration\migration
 {
     public function effectively_installed()
     {
