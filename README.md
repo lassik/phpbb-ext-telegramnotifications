@@ -23,19 +23,16 @@ Make your own Telegram bot.
 
 Clone this Git repository into `phpBB/ext/lassik/telegramnotifications`:
 
-    $ git clone https://github.com/lassik/phpbb-ext-telegramnotifications.git phpBB/ext/lassik/telegramnotifications
-
-Manually fill in the constants at the end of the source file `event/main_listener.php`:
-
-* `$TELEGRAM_BOT_AUTH_TOKEN`
-* `$TELEGRAM_BOT_CHAT_ID`
-
-You get the auth token when you make the bot. To get the chat ID,
-see
-<https://stackoverflow.com/questions/32423837/telegram-bot-how-to-get-a-group-chat-id>.
+	$ cd path/to/your/phpBB
+    $ git clone https://github.com/lassik/phpbb-ext-telegramnotifications.git ext/lassik/telegramnotifications
 
 In phpBB, go to "ACP" > "Customise" > "Extensions" and enable the
-"Acme Demo Extension" extension.
+"Telegram Notifications" extension.
+
+Then to "ACP" > "Extensions" > "Telegram IDs" and fill in the
+settings. You get the auth token when you make the bot. To get the
+chat ID, see
+<https://stackoverflow.com/questions/32423837/telegram-bot-how-to-get-a-group-chat-id>.
 
 Now try to make new posts and see if you get notified on Telegram!
 
