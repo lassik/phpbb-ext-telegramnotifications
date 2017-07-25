@@ -21,9 +21,9 @@ similar extension for Slack notifications).
 
 Make your own Telegram bot.
 
-Clone this Git repository into `phpBB/ext/lassik/telegram_notifications`:
+Clone this Git repository into `phpBB/ext/lassik/telegramnotifications`:
 
-    $ git clone https://github.com/lassik/phpbb-ext-telegram-notifications.git phpBB/ext/lassik/telegram_notifications
+    $ git clone https://github.com/lassik/phpbb-ext-telegramnotifications.git phpBB/ext/lassik/telegramnotifications
 
 Manually fill in the constants at the end of the source file `event/main_listener.php`:
 
