@@ -15,12 +15,12 @@ class main_info
     {
         return array(
             'filename'  => '\lassik\telegramnotifications\acp\main_module',
-            'title'     => 'TELEGRAM NOTIFICATIONS',
+            'title'     => 'ACP_TELEGRAM_NOTIFICATIONS',
             'modes'     => array(
-                'main'  => array(
+                'settings'  => array(
                     'title' => 'Telegram IDs',
                     'auth'  => 'ext_lassik/telegramnotifications && acl_a_board',
-                    'cat'   => array('TELEGRAM NOTIFICATIONS')
+                    'cat'   => array('ACP_TELEGRAM_NOTIFICATIONS')
                 ),
             ),
         );
