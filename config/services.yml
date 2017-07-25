@@ -1,7 +1,7 @@
 services:
-    lassik.telegramnotifications.listener:
-        class: lassik\telegramnotifications\event\main_listener
-        arguments:
-            - '@config'
-        tags:
-            - { name: event.listener }
+  lassik.telegramnotifications.listener:
+    class: lassik\telegramnotifications\event\main_listener
+    arguments:
+      - '@config'
+    tags:
+      - { name: event.listener }

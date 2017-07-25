@@ -1,11 +1,11 @@
 <?php
 /**
-*
-* @package phpBB extension - Telegram notifications
-* @copyright (c) 2017 Lassi Kortela
-* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
-*
-*/
+ *
+ * @package phpBB extension - Telegram notifications
+ * @copyright (c) 2017 Lassi Kortela
+ * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+ *
+ */
 
 namespace lassik\telegramnotifications\acp;
 
@@ -17,7 +17,7 @@ class main_module
     {
         global $config, $language, $request, $template, $phpbb_container;
 
-		$language = $phpbb_container->get('language');
+        $language = $phpbb_container->get('language');
         #$user->add_lang('acp/common');
         $this->tpl_name = 'telegramnotifications_body';
         $this->page_title = $language->lang('ACP_TELEGRAM_NOTIFICATIONS');

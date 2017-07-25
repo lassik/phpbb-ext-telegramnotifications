@@ -1,11 +1,11 @@
 <?php
 /**
-*
-* @package phpBB extension - Telegram notifications
-* @copyright (c) 2017 Lassi Kortela
-* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
-*
-*/
+ *
+ * @package phpBB extension - Telegram notifications
+ * @copyright (c) 2017 Lassi Kortela
+ * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
+ *
+ */
 
 if (!defined('IN_PHPBB'))
 {

@@ -7,11 +7,11 @@
 	"time": "2017-07-25",
 	"license": "GPL-2.0",
 	"authors": [{
-			"name": "Lassi Kortela",
-			"email": "lassi@lassi.io",
-			"homepage": "http://lassi.io/",
-			"role": "Lead Developer"
-		}],
+		"name": "Lassi Kortela",
+		"email": "lassi@lassi.io",
+		"homepage": "http://lassi.io/",
+		"role": "Lead Developer"
+	}],
 	"require": {
 		"php": ">=5.4.0",
 		"composer/installers": "~1.0"
