@@ -45,8 +45,6 @@ class main_listener implements EventSubscriberInterface
     public function handle_submit_post_end($event)
     {
         $mode = $event['mode'];
-        if ($mode === 'edit')
-            return;
         $user = $event['username'];
         $prefix = $this->prefix_from_mode($mode);
         $title = html_entity_decode($event['data']['topic_title']);
