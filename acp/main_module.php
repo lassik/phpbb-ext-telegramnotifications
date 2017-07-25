@@ -15,12 +15,11 @@ class main_module
 
     function main($id, $mode)
     {
-        global $config, $language, $request, $template, $phpbb_container;
+        global $config, $request, $template, $user;
 
-        $language = $phpbb_container->get('language');
-        #$user->add_lang('acp/common');
+		$user->add_lang('acp/common');
         $this->tpl_name = 'telegramnotifications_body';
-        $this->page_title = $language->lang('ACP_TELEGRAM_NOTIFICATIONS');
+        $this->page_title = $user->lang('ACP_TELEGRAM_NOTIFICATIONS');
         add_form_key('lassik/telegramnotifications');
 
         if ($request->is_set_post('submit'))
@@ -38,7 +37,7 @@ class main_module
                          $request->variable('lassik_telegram_chat_id',
                                             ''));
 
-            trigger_error($language->lang('ACP_TELEGRAM_IDS_UPDATED') .
+            trigger_error($user->lang('ACP_TELEGRAM_IDS_UPDATED') .
                           adm_back_link($this->u_action));
         }
 
