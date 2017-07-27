@@ -18,7 +18,6 @@ class main_module
         global $config, $request, $template, $phpbb_container;
 
         $lang = $phpbb_container->get('language');
-        $lang->add_lang('common', 'lassik/telegramnotifications');
         $this->tpl_name = 'telegramnotifications_body';
         $this->page_title = $lang->lang('ACP_TELEGRAM_NOTIFICATIONS');
         add_form_key('lassik/telegramnotifications');
