@@ -23,7 +23,7 @@ Make your own Telegram bot.
 
 Clone this Git repository into `phpBB/ext/lassik/telegramnotifications`:
 
-	$ cd path/to/your/phpBB
+    $ cd path/to/your/phpBB
     $ git clone https://github.com/lassik/phpbb-ext-telegramnotifications.git ext/lassik/telegramnotifications
 
 In phpBB, go to "ACP" > "Customise" > "Extensions" and enable the

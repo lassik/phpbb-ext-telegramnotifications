@@ -1,26 +1,26 @@
 <!-- INCLUDE overall_header.html -->
 <h1>{L_ACP_TELEGRAM_IDS}</h1>
 <form id="acp_board" method="post" action="{U_ACTION}">
-  <fieldset>
-    <dl>
-      <dt><label for="lassik_telegram_bot_auth_token">
-	  {L_ACP_TELEGRAM_BOT_AUTH_TOKEN}</label></dt>
-      <dd><input type="text" name="lassik_telegram_bot_auth_token"
-		 value="{LASSIK_TELEGRAM_BOT_AUTH_TOKEN}" size="50"></dd>
-    </dl>
-    <dl>
-      <dt><label for="lassik_telegram_chat_id">
-	  {L_ACP_TELEGRAM_CHAT_ID}</label></dt>
-      <dd><input type="text" name="lassik_telegram_chat_id"
-		 value="{LASSIK_TELEGRAM_CHAT_ID}" size="50"></dd>
-    </dl>
-    <p class="submit-buttons">
-      <input class="button1" type="submit" id="submit" name="submit"
-	     value="{L_SUBMIT}" />&nbsp;
-      <input class="button2" type="reset" id="reset" name="reset"
-	     value="{L_RESET}" />
-    </p>
-    {S_FORM_TOKEN}
-  </fieldset>
+	<fieldset>
+		<dl>
+			<dt><label for="lassik_telegram_bot_auth_token">
+					{L_ACP_TELEGRAM_BOT_AUTH_TOKEN}</label></dt>
+			<dd><input type="text" name="lassik_telegram_bot_auth_token"
+					   value="{LASSIK_TELEGRAM_BOT_AUTH_TOKEN}" size="50"></dd>
+		</dl>
+		<dl>
+			<dt><label for="lassik_telegram_chat_id">
+					{L_ACP_TELEGRAM_CHAT_ID}</label></dt>
+			<dd><input type="text" name="lassik_telegram_chat_id"
+					   value="{LASSIK_TELEGRAM_CHAT_ID}" size="50"></dd>
+		</dl>
+		<p class="submit-buttons">
+			<input class="button1" type="submit" id="submit" name="submit"
+				   value="{L_SUBMIT}" />&nbsp;
+			<input class="button2" type="reset" id="reset" name="reset"
+				   value="{L_RESET}" />
+		</p>
+		{S_FORM_TOKEN}
+	</fieldset>
 </form>
 <!-- INCLUDE overall_footer.html -->
