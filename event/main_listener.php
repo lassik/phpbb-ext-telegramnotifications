@@ -70,7 +70,11 @@ class main_listener implements EventSubscriberInterface
 		if (empty($auth) || empty($chat_id))
 			return;
 		$url = 'https://api.telegram.org/bot'.urlencode($auth).'/sendMessage';
-		$data = array('chat_id' => $chat_id, 'text' => $text);
+		$data = array(
+			'chat_id' => $chat_id,
+			'disable_web_page_preview' => 'true',
+			'text' => $text
+        );
 		if (!function_exists('curl_version'))
 			return;
 		$curl = curl_init($url);
