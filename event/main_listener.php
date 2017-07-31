@@ -50,8 +50,12 @@ class main_listener implements EventSubscriberInterface
 		$title = html_entity_decode($event['data']['topic_title']);
 		$url = generate_board_url().'/'.
 			 preg_replace('/^.\//', '', html_entity_decode($event['url']));
-		$message = '['.$user.'] '.$prefix.$title.'. '.$url;
-		$this->send_message_as_telegram_bot($message);
+		$html = '['.htmlspecialchars($user).'] '.
+			  htmlspecialchars($prefix).
+			  '<a href="'.htmlspecialchars($url).'">'.
+			  htmlspecialchars($title).
+			  '</a>';
+		$this->send_html_message_as_telegram_bot($html);
 	}
 
 	private function prefix_from_mode($mode) {
@@ -64,7 +68,7 @@ class main_listener implements EventSubscriberInterface
 		}
 	}
 
-	private function send_message_as_telegram_bot($text) {
+	private function send_html_message_as_telegram_bot($html) {
 		$auth = $this->config['lassik_telegram_bot_auth_token'];
 		$chat_id = $this->config['lassik_telegram_chat_id'];
 		if (empty($auth) || empty($chat_id))
@@ -73,7 +77,8 @@ class main_listener implements EventSubscriberInterface
 		$data = array(
 			'chat_id' => $chat_id,
 			'disable_web_page_preview' => 'true',
-			'text' => $text
+			'parse_mode' => 'HTML',
+			'text' => $html
         );
 		if (!function_exists('curl_version'))
 			return;
