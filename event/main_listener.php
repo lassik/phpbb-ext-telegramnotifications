@@ -34,7 +34,7 @@ class main_listener implements EventSubscriberInterface
 	/**
 	 * Constructor
 	 *
-	 * @param \phpbb\config\config	$config	 Configuration object
+	 * @param \phpbb\config\config	$config
 	 */
 	public function __construct(\phpbb\config\config $config)
 	{
@@ -42,6 +42,9 @@ class main_listener implements EventSubscriberInterface
 	}
 
 	/**
+	 * Handle phpBB's submit_post_end event by sending a Telegram
+	 * message that says what happened.
+	 *
 	 * @param Event $event
 	 */
 	public function handle_submit_post_end($event)
@@ -60,6 +63,11 @@ class main_listener implements EventSubscriberInterface
 		$this->send_html_message_as_telegram_bot($html);
 	}
 
+	/**
+	 * Given a phpBB event mode string (post, reply, quote, edit),
+	 * return a human-readable string (like an email subject prefix)
+	 * that indicates what happened to the topic.
+	 */
 	private function prefix_from_mode($mode)
 	{
 		if ($mode === 'post')
@@ -76,6 +84,24 @@ class main_listener implements EventSubscriberInterface
 		}
 	}
 
+	/**
+	 * Send a message to a Telegram group chat or user. The message
+	 * will look as though it comes from the Telegram bot (which must
+	 * have been invited to the group).
+	 *
+	 * A very bare-bones HTML subset is used to format the message.
+	 * Links and bold are supported. Tags cannot be nested. Remember
+	 * to escape plain text using htmlspecialchars().
+	 *
+	 * The Telegram bot's auth token as well as the target chat ID are
+	 * retrieved from the phpBB configuration. Note that group chat
+	 * IDs are negative numbers. The function will silently fail
+	 * unless both configuration parameters are set.
+	 *
+	 * PHP's curl API is used to make a HTTPS connection to the
+	 * Telegram API. The function will silently fail if curl support
+	 * is not available.
+	 */
 	private function send_html_message_as_telegram_bot($html)
 	{
 		$auth = $this->config['lassik_telegram_bot_auth_token'];

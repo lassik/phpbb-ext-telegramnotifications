@@ -18,6 +18,9 @@ class main_module
 {
 	private $u_action;
 
+	/**
+	 * Show the extension's ACP page and accept input from that page.
+	 */
 	public function main($id, $mode)
 	{
 		global $config, $request, $template, $phpbb_container;
