@@ -16,9 +16,9 @@ namespace lassik\telegramnotifications\acp;
  */
 class main_module
 {
-	var $u_action;
+	private $u_action;
 
-	function main($id, $mode)
+	public function main($id, $mode)
 	{
 		global $config, $request, $template, $phpbb_container;
 
