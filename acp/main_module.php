@@ -16,7 +16,7 @@ namespace lassik\telegramnotifications\acp;
  */
 class main_module
 {
-	private $u_action;
+	public $u_action;
 
 	/**
 	 * Show the extension's ACP page and accept input from that page.
