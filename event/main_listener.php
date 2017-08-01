@@ -80,8 +80,8 @@ class main_listener implements EventSubscriberInterface
 			'chat_id' => $chat_id,
 			'disable_web_page_preview' => 'true',
 			'parse_mode' => 'HTML',
-			'text' => $html
-        );
+			'text' => $html,
+		);
 		if (!function_exists('curl_version'))
 			return;
 		$curl = curl_init($url);

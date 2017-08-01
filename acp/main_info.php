@@ -23,7 +23,7 @@ class main_info
 				'settings'	=> array(
 					'title' => 'Telegram IDs',
 					'auth'	=> 'ext_lassik/telegramnotifications && acl_a_board',
-					'cat'	=> array('ACP_TELEGRAM_NOTIFICATIONS')
+					'cat'	=> array('ACP_TELEGRAM_NOTIFICATIONS'),
 				),
 			),
 		);
