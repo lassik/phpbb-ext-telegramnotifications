@@ -9,6 +9,9 @@
 
 namespace lassik\telegramnotifications\migrations;
 
+/**
+ * @package phpBB extension - Telegram notifications
+ */
 class release_0_1_0 extends \phpbb\db\migration\migration
 {
 	public function effectively_installed()

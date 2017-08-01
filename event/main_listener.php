@@ -16,6 +16,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * Event listener
+ *
+ * @package phpBB extension - Telegram notifications
  */
 class main_listener implements EventSubscriberInterface
 {

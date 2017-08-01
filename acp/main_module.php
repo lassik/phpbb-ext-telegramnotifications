@@ -9,6 +9,11 @@
 
 namespace lassik\telegramnotifications\acp;
 
+/**
+ * Provide a "Telegram IDs" page in the ACP Extensions section.
+ *
+ * @package phpBB extension - Telegram notifications
+ */
 class main_module
 {
 	var $u_action;

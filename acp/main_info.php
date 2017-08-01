@@ -9,6 +9,9 @@
 
 namespace lassik\telegramnotifications\acp;
 
+/**
+ * @package phpBB extension - Telegram notifications
+ */
 class main_info
 {
 	function module()
