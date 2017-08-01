@@ -60,21 +60,30 @@ class main_listener implements EventSubscriberInterface
 		$this->send_html_message_as_telegram_bot($html);
 	}
 
-	private function prefix_from_mode($mode) {
-		if ($mode === 'post') {
+	private function prefix_from_mode($mode)
+	{
+		if ($mode === 'post')
+		{
 			return '';
-		} else if ($mode === 'reply') {
+		}
+		else if ($mode === 'reply')
+		{
 			return 'Re: ';
-		} else {
+		}
+		else
+		{
 			return ucfirst($mode).': ';
 		}
 	}
 
-	private function send_html_message_as_telegram_bot($html) {
+	private function send_html_message_as_telegram_bot($html)
+	{
 		$auth = $this->config['lassik_telegram_bot_auth_token'];
 		$chat_id = $this->config['lassik_telegram_chat_id'];
 		if (empty($auth) || empty($chat_id))
+		{
 			return;
+		}
 		$url = 'https://api.telegram.org/bot'.urlencode($auth).'/sendMessage';
 		$data = array(
 			'chat_id' => $chat_id,
@@ -83,7 +92,9 @@ class main_listener implements EventSubscriberInterface
 			'text' => $html,
 		);
 		if (!function_exists('curl_version'))
+		{
 			return;
+		}
 		$curl = curl_init($url);
 		//curl_setopt($curl, CURLOPT_VERBOSE, 1);
 		curl_setopt($curl, CURLOPT_TIMEOUT, 10);
