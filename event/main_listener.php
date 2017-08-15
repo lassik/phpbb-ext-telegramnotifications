@@ -128,18 +128,30 @@ class main_listener implements EventSubscriberInterface
 		curl_setopt($curl, CURLOPT_URL, $url);
 		curl_setopt($curl, CURLOPT_POST, true);
 		curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($query));
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, false);
-		curl_setopt($curl, CURLOPT_FAILONERROR, true);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($curl, CURLOPT_FAILONERROR, false);
 		curl_setopt($curl, CURLOPT_TIMEOUT, 10);
-		if (!curl_exec($curl))
+		$result = curl_exec($curl);
+		$curl_error = curl_error($curl);
+		curl_close($curl);
+		if ($result === false)
 		{
-			$this->set_last_error(curl_error($curl));
+			$this->set_last_error($curl_error);
+			return;
+		}
+		$result_json = json_decode($result, true, 5);
+		if ($result_json === NULL)
+		{
+			$this->set_last_error('JSON '.json_last_error_msg());
+		}
+		else if ($result_json['ok'] !== TRUE)
+		{
+			$this->set_last_error($result_json['description']);
 		}
 		else
 		{
 			$this->set_last_error('Success');
 		}
-		curl_close($curl);
 	}
 
 	/**
