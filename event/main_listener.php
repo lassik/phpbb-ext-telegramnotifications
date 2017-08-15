@@ -54,8 +54,7 @@ class main_listener implements EventSubscriberInterface
 		$html = '['.htmlspecialchars($event['username']).'] '.
 			  htmlspecialchars($this->prefix_from_mode($event['mode'])).
 			  '<a href="'.htmlspecialchars($url).'">'.
-			  htmlspecialchars(
-				  html_entity_decode($event['data']['topic_title'])).
+			  $event['data']['topic_title'].
 			  '</a>';
 		$this->send_html_message_as_telegram_bot($html);
 	}
