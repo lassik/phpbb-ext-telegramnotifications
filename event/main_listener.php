@@ -148,6 +148,7 @@ class main_listener implements EventSubscriberInterface
 	 */
 	private function set_last_error($errmsg)
 	{
-		$this->config->set('lassik_telegram_last_error', $errmsg);
+		$this->config->set('lassik_telegram_last_error',
+						   $errmsg.' ('.date(DATE_RFC2822).')');
 	}
 }
