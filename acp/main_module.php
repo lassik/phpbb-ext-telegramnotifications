@@ -45,6 +45,8 @@ class main_module
 						 $request->variable('lassik_telegram_chat_id',
 											''));
 
+			$config->set('lassik_telegram_last_error', '');
+
 			trigger_error($lang->lang('ACP_TELEGRAM_IDS_UPDATED') .
 						  adm_back_link($this->u_action));
 		}
