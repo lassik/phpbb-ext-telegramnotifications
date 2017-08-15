@@ -23,4 +23,5 @@ $lang = array_merge($lang, array(
 	'ACP_TELEGRAM_IDS_UPDATED'	  => 'Telegram IDs have been updated',
 	'ACP_TELEGRAM_BOT_AUTH_TOKEN' => 'Telegram bot auth token',
 	'ACP_TELEGRAM_CHAT_ID'		  => 'Telegram chat ID',
+	'ACP_TELEGRAM_LAST_ERROR'	  => 'Last error',
 ));

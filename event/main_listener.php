@@ -102,8 +102,14 @@ class main_listener implements EventSubscriberInterface
 	{
 		$auth = $this->config['lassik_telegram_bot_auth_token'];
 		$chat_id = $this->config['lassik_telegram_chat_id'];
-		if (empty($auth) || empty($chat_id))
+		if (empty($auth))
 		{
+			$this->set_last_error('Telegram bot auth token not filled in');
+			return;
+		}
+		if (empty($chat_id))
+		{
+			$this->set_last_error('Telegram chat ID not filled in');
 			return;
 		}
 		$url = 'https://api.telegram.org/bot'.urlencode($auth).'/sendMessage';
@@ -115,6 +121,7 @@ class main_listener implements EventSubscriberInterface
 		);
 		if (!function_exists('curl_version'))
 		{
+			$this->set_last_error('PHP cURL support is not enabled');
 			return;
 		}
 		$curl = curl_init($url);
@@ -123,7 +130,24 @@ class main_listener implements EventSubscriberInterface
 		curl_setopt($curl, CURLOPT_POST, true);
 		curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, false);
-		curl_exec($curl);
+		curl_setopt($curl, CURLOPT_FAILONERROR, true);
+		if (!curl_exec($curl))
+		{
+			$this->set_last_error(curl_error($curl));
+		}
+		else
+		{
+			$this->set_last_error('Success');
+		}
 		curl_close($curl);
+	}
+
+	/**
+	 * Set the last error message that we display in the ACP so users
+	 * can see what went wrong if the extension doesn't work for them.
+	 */
+	private function set_last_error($errmsg)
+	{
+		$this->config->set('lassik_telegram_last_error', $errmsg);
 	}
 }

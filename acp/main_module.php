@@ -58,6 +58,9 @@ class main_module
 
 			'LASSIK_TELEGRAM_CHAT_ID' =>
 			$config['lassik_telegram_chat_id'],
+
+			'LASSIK_TELEGRAM_LAST_ERROR' =>
+			$config['lassik_telegram_last_error'],
 		));
 	}
 }
