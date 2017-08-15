@@ -113,7 +113,7 @@ class main_listener implements EventSubscriberInterface
 			return;
 		}
 		$url = 'https://api.telegram.org/bot'.urlencode($auth).'/sendMessage';
-		$data = array(
+		$query = array(
 			'chat_id' => $chat_id,
 			'disable_web_page_preview' => 'true',
 			'parse_mode' => 'HTML',
@@ -124,13 +124,13 @@ class main_listener implements EventSubscriberInterface
 			$this->set_last_error('PHP cURL support is not enabled');
 			return;
 		}
-		$curl = curl_init($url);
-		//curl_setopt($curl, CURLOPT_VERBOSE, 1);
-		curl_setopt($curl, CURLOPT_TIMEOUT, 10);
+		$curl = curl_init();
+		curl_setopt($curl, CURLOPT_URL, $url);
 		curl_setopt($curl, CURLOPT_POST, true);
-		curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
+		curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($query));
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, false);
 		curl_setopt($curl, CURLOPT_FAILONERROR, true);
+		curl_setopt($curl, CURLOPT_TIMEOUT, 10);
 		if (!curl_exec($curl))
 		{
 			$this->set_last_error(curl_error($curl));
