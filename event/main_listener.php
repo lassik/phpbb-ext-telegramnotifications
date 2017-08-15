@@ -49,16 +49,13 @@ class main_listener implements EventSubscriberInterface
 	 */
 	public function handle_submit_post_end($event)
 	{
-		$mode = $event['mode'];
-		$user = $event['username'];
-		$prefix = $this->prefix_from_mode($mode);
-		$title = html_entity_decode($event['data']['topic_title']);
 		$url = generate_board_url().'/'.
 			 preg_replace('/^.\//', '', html_entity_decode($event['url']));
-		$html = '['.htmlspecialchars($user).'] '.
-			  htmlspecialchars($prefix).
+		$html = '['.htmlspecialchars($event['username']).'] '.
+			  htmlspecialchars($this->prefix_from_mode($event['mode'])).
 			  '<a href="'.htmlspecialchars($url).'">'.
-			  htmlspecialchars($title).
+			  htmlspecialchars(
+				  html_entity_decode($event['data']['topic_title'])).
 			  '</a>';
 		$this->send_html_message_as_telegram_bot($html);
 	}
