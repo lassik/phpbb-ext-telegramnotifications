@@ -50,7 +50,7 @@ class main_listener implements EventSubscriberInterface
 	public function handle_submit_post_end($event)
 	{
 		$url = generate_board_url().'/'.
-			 preg_replace('/^.\//', '', html_entity_decode($event['url']));
+			 preg_replace('/^\.\//', '', html_entity_decode($event['url']));
 		$html = '['.htmlspecialchars($event['username']).'] '.
 			  htmlspecialchars($this->prefix_from_mode($event['mode'])).
 			  '<a href="'.htmlspecialchars($url).'">'.
