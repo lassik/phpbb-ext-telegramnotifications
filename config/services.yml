@@ -2,13 +2,19 @@ services:
   lassik.telegramnotifications.acp.controller:
     class: lassik\telegramnotifications\controller\acp_controller
     arguments:
+      - '@lassik.telegramnotifications.functions'
       - '@config'
       - '@language'
       - '@template'
       - '@request'
+  lassik.telegramnotifications.functions:
+    class: lassik\telegramnotifications\core\functions
+    arguments:
+      - '@config'
   lassik.telegramnotifications.listener:
     class: lassik\telegramnotifications\event\main_listener
     arguments:
+      - '@lassik.telegramnotifications.functions'
       - '@config'
     tags:
       - { name: event.listener }
