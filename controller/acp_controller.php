@@ -11,6 +11,9 @@ namespace lassik\telegramnotifications\controller;
 
 class acp_controller
 {
+	/** @var \lassik\telegramnotifications\core\functions */
+	protected $functions;
+
 	/** @var \phpbb\config\config */
 	protected $config;
 
@@ -26,22 +29,25 @@ class acp_controller
 	/**
 	 * Constructor
 	 *
+	 * @param \lassik\telegramnotifications\core\functions	$functions
 	 * @param \phpbb\config\config				$config
 	 * @param \phpbb\language\language			$language
 	 * @param \phpbb\template\template			$template
 	 * @param \phpbb\request\request_interface	$request
 	 */
 	public function __construct(
+		\lassik\telegramnotifications\core\functions $functions,
 		\phpbb\config\config			  $config,
 		\phpbb\language\language		  $language,
 		\phpbb\template\template		  $template,
 		\phpbb\request\request_interface  $request
 	)
 	{
-		$this->config	= $config;
-		$this->language = $language;
-		$this->template	= $template;
-		$this->request	= $request;
+		$this->functions = $functions;
+		$this->config	 = $config;
+		$this->language	 = $language;
+		$this->template	 = $template;
+		$this->request	 = $request;
 	}
 
 	/**
