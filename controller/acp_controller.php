@@ -45,7 +45,7 @@ class acp_controller
 	}
 
 	/**
-	 * Show the extension's ACP page and accept input from that page.
+	 * Handle the "Telegram Settings" ACP page.
 	 *
 	 * @param string $u_action
 	 */
@@ -72,7 +72,7 @@ class acp_controller
 
 			$this->config->set('lassik_telegram_last_error', '');
 
-			trigger_error($this->language->lang('ACP_TELEGRAM_IDS_UPDATED') .
+			trigger_error($this->language->lang('ACP_TELEGRAM_SETTINGS_UPDATED') .
 						  adm_back_link($this->u_action));
 		}
 

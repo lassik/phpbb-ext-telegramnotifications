@@ -21,7 +21,7 @@ class main_info
 			'title'		=> 'ACP_TELEGRAM_NOTIFICATIONS',
 			'modes'		=> array(
 				'settings'	=> array(
-					'title' => 'Telegram IDs',
+					'title' => 'ACP_TELEGRAM_SETTINGS',
 					'auth'	=> 'ext_lassik/telegramnotifications && acl_a_board',
 					'cat'	=> array('ACP_TELEGRAM_NOTIFICATIONS'),
 				),
