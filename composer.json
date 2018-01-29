@@ -3,7 +3,7 @@
 	"type": "phpbb-extension",
 	"description": "Notify on Telegram whenever someone posts on phpBB",
 	"homepage": "https://github.com/lassik/phpbb-ext-telegramnotifications",
-	"version": "0.4.0",
+	"version": "0.3.0",
 	"time": "2017-07-25",
 	"license": "GPL-2.0",
 	"authors": [{

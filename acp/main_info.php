@@ -20,13 +20,8 @@ class main_info
 			'filename'	=> '\lassik\telegramnotifications\acp\main_module',
 			'title'		=> 'ACP_TELEGRAM_NOTIFICATIONS',
 			'modes'		=> array(
-				'telegram_ids'	=> array(
-					'title' => 'ACP_TELEGRAM_TELEGRAM_IDS',
-					'auth'	=> 'ext_lassik/telegramnotifications && acl_a_board',
-					'cat'	=> array('ACP_TELEGRAM_NOTIFICATIONS'),
-				),
-				'find_chat_id'	=> array(
-					'title' => 'ACP_TELEGRAM_FIND_CHAT_ID',
+				'settings'	=> array(
+					'title' => 'Telegram IDs',
 					'auth'	=> 'ext_lassik/telegramnotifications && acl_a_board',
 					'cat'	=> array('ACP_TELEGRAM_NOTIFICATIONS'),
 				),

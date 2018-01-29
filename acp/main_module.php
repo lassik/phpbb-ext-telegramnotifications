@@ -25,8 +25,8 @@ class main_module
 	{
 		global $phpbb_container;
 
-		$this->tpl_name = 'acp_telegramnotifications_' . strtolower($mode);
-		$this->page_title = 'ACP_TELEGRAM_' . strtoupper($mode);
+		$this->tpl_name = 'telegramnotifications_body';
+		$this->page_title = 'ACP_TELEGRAM_NOTIFICATIONS';
 		$controller = $phpbb_container->get(
 			'lassik.telegramnotifications.acp.controller');
 		$controller->$mode($this->u_action);
