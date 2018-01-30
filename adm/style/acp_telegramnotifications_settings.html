@@ -2,24 +2,26 @@
 <h1>{L_ACP_TELEGRAM_SETTINGS}</h1>
 <form id="acp_board" method="post" action="{U_ACTION}">
 	<fieldset>
+		<legend>{L_ACP_TELEGRAM_CONNECTION}</legend>
 		<dl>
 			<dt><label for="lassik_telegram_bot_auth_token">
-					{L_ACP_TELEGRAM_BOT_AUTH_TOKEN}</label></dt>
+					{L_ACP_TELEGRAM_BOT_AUTH_TOKEN}:</label></dt>
 			<dd><input type="text" name="lassik_telegram_bot_auth_token"
 					   value="{LASSIK_TELEGRAM_BOT_AUTH_TOKEN}" size="50"></dd>
 		</dl>
 		<dl>
 			<dt><label for="lassik_telegram_chat_id">
-					{L_ACP_TELEGRAM_CHAT_ID}</label></dt>
+					{L_ACP_TELEGRAM_CHAT_ID}:</label></dt>
 			<dd><input type="text" name="lassik_telegram_chat_id"
 					   value="{LASSIK_TELEGRAM_CHAT_ID}" size="50"></dd>
 		</dl>
 		<dl>
-			<dt><label>{L_ACP_TELEGRAM_LAST_ERROR}</label></dt>
+			<dt><label>{L_ACP_TELEGRAM_LAST_ERROR}:</label></dt>
 			<dd>{LASSIK_TELEGRAM_LAST_ERROR}</dd>
 		</dl>
 	</fieldset>
 	<fieldset class="submit-buttons">
+		<legend>Submit</legend>
 		<input class="button1" type="submit" id="submit" name="submit"
 			   value="{L_SUBMIT}" />&nbsp;
 		<input class="button2" type="reset" id="reset" name="reset"
