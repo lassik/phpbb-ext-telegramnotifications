@@ -2,7 +2,7 @@
 /**
  *
  * @package phpBB extension - Telegram notifications
- * @copyright (c) 2017 Lassi Kortela
+ * @copyright (c) 2017, 2018 Lassi Kortela
  * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
  *
  */
@@ -10,7 +10,7 @@
 namespace lassik\telegramnotifications\acp;
 
 /**
- * Provide a "Telegram IDs" page in the ACP Extensions section.
+ * Provide "Telegram Notifications" pages in the ACP Extensions section.
  *
  * @package phpBB extension - Telegram notifications
  */

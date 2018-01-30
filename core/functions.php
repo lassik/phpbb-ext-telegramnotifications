@@ -2,7 +2,7 @@
 /**
  *
  * @package phpBB extension - Telegram notifications
- * @copyright (c) 2017 Lassi Kortela
+ * @copyright (c) 2017, 2018 Lassi Kortela
  * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
  *
  */
@@ -83,5 +83,40 @@ class functions
 		}
 		$this->set_last_error('Success');
 		return $result_json;
+	}
+
+	public function parse_chat_id($json)
+	{
+		$ans = array(NULL, 'No chat found');
+		if (is_array($json))
+		{
+			foreach ($json['result'] as $update)
+			{
+				$chat = $update['message']['chat'];
+				if ($chat)
+				{
+					$ans = array($chat['id'], $this->parse_chat_desc($chat));
+				}
+			}
+		}
+		return $ans;
+	}
+
+	private function parse_chat_desc($chat)
+	{
+		$ans = 'Unknown chat';
+		if ($chat['type'])
+		{
+			$ans = ucfirst($chat['type']).': ';
+			foreach (array('title', 'first_name', 'last_name', 'username')
+					 as $field)
+			{
+				if ($chat[$field])
+				{
+					$ans = $ans.' '.$chat[$field];
+				}
+			}
+		}
+		return $ans;
 	}
 }
