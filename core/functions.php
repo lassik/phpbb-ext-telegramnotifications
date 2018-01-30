@@ -85,6 +85,40 @@ class functions
 		return $result_json;
 	}
 
+	/**
+	 * Send a message to a Telegram group chat or user. The message
+	 * will look as though it comes from the Telegram bot (which must
+	 * have been invited to the group).
+	 *
+	 * A very bare-bones HTML subset is used to format the message.
+	 * Links and bold are supported. Tags cannot be nested. Remember
+	 * to escape plain text using htmlspecialchars().
+	 *
+	 * The Telegram bot's auth token as well as the target chat ID are
+	 * retrieved from the phpBB configuration. Note that group chat
+	 * IDs are negative numbers. The function will fail unless both
+	 * configuration parameters are set.
+	 *
+	 * PHP's curl API is used to make a HTTPS connection to the
+	 * Telegram API. The function will fail if curl support is not
+	 * available.
+	 */
+	public function send_html_message_as_telegram_bot($html)
+	{
+		$chat_id = $this->config['lassik_telegram_chat_id'];
+		if (empty($chat_id))
+		{
+			$this->set_last_error('Telegram chat ID not filled in');
+			return;
+		}
+		$this->call_telegram_bot_api('sendMessage', array(
+			'chat_id' => $chat_id,
+			'disable_web_page_preview' => 'true',
+			'parse_mode' => 'HTML',
+			'text' => $html,
+		));
+	}
+
 	public function parse_chat_id($json)
 	{
 		$ans = array(NULL, 'No chat found');
