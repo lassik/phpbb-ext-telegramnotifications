@@ -51,7 +51,7 @@ class acp_controller
 	}
 
 	/**
-	 * Handle the "Telegram Settings" ACP page.
+	 * Handle the "Telegram settings" ACP page.
 	 *
 	 * @param string $u_action
 	 */

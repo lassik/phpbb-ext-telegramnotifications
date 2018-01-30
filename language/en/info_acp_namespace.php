@@ -25,7 +25,7 @@ $lang = array_merge($lang, array(
 	'ACP_TELEGRAM_FOUND_CHAT_ID'    => 'Found the following chat ID',
 	'ACP_TELEGRAM_LAST_ERROR'       => 'Last error',
 	'ACP_TELEGRAM_NOTIFICATIONS'    => 'Telegram Notifications',
-	'ACP_TELEGRAM_SETTINGS'         => 'Telegram Settings',
+	'ACP_TELEGRAM_SETTINGS'         => 'Telegram settings',
 	'ACP_TELEGRAM_SETTINGS_UPDATED'	=> 'Telegram settings have been updated',
 	'ACP_TELEGRAM_USE_CHAT_ID'      => 'Use this chat ID',
 ));
