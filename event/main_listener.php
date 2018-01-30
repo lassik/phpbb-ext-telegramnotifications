@@ -28,17 +28,25 @@ class main_listener implements EventSubscriberInterface
 		);
 	}
 
-	/* @var \phpbb\controller\helper */
+	/** @var \lassik\telegramnotifications\core\functions */
+	protected $functions;
+
+	/** @var \phpbb\config\config */
 	protected $config;
 
 	/**
 	 * Constructor
 	 *
-	 * @param \phpbb\config\config	$config
+	 * @param \lassik\telegramnotifications\core\functions	$functions
+	 * @param \phpbb\config\config							$config
 	 */
-	public function __construct(\phpbb\config\config $config)
+	public function __construct(
+		\lassik\telegramnotifications\core\functions $functions,
+		\phpbb\config\config $config
+	)
 	{
-		$this->config = $config;
+		$this->functions = $functions;
+		$this->config	 = $config;
 	}
 
 	/**
@@ -100,67 +108,17 @@ class main_listener implements EventSubscriberInterface
 	 */
 	private function send_html_message_as_telegram_bot($html)
 	{
-		$auth = $this->config['lassik_telegram_bot_auth_token'];
 		$chat_id = $this->config['lassik_telegram_chat_id'];
-		if (empty($auth))
-		{
-			$this->set_last_error('Telegram bot auth token not filled in');
-			return;
-		}
 		if (empty($chat_id))
 		{
-			$this->set_last_error('Telegram chat ID not filled in');
+			$this->functions->set_last_error('Telegram chat ID not filled in');
 			return;
 		}
-		$url = 'https://api.telegram.org/bot'.urlencode($auth).'/sendMessage';
-		$query = array(
+		$this->functions->call_telegram_bot_api('sendMessage', array(
 			'chat_id' => $chat_id,
 			'disable_web_page_preview' => 'true',
 			'parse_mode' => 'HTML',
 			'text' => $html,
-		);
-		if (!function_exists('curl_version'))
-		{
-			$this->set_last_error('PHP cURL support is not enabled');
-			return;
-		}
-		$curl = curl_init();
-		curl_setopt($curl, CURLOPT_URL, $url);
-		curl_setopt($curl, CURLOPT_POST, true);
-		curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($query));
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($curl, CURLOPT_FAILONERROR, false);
-		curl_setopt($curl, CURLOPT_TIMEOUT, 10);
-		$result = curl_exec($curl);
-		$curl_error = curl_error($curl);
-		curl_close($curl);
-		if ($result === false)
-		{
-			$this->set_last_error($curl_error);
-			return;
-		}
-		$result_json = json_decode($result, true, 5);
-		if ($result_json === NULL)
-		{
-			$this->set_last_error('JSON '.json_last_error_msg());
-		}
-		else if ($result_json['ok'] !== TRUE)
-		{
-			$this->set_last_error($result_json['description']);
-		}
-		else
-		{
-			$this->set_last_error('Success');
-		}
-	}
-
-	/**
-	 * Set the last error message that we display in the ACP so users
-	 * can see what went wrong if the extension doesn't work for them.
-	 */
-	private function set_last_error($errmsg)
-	{
-		$this->config->set('lassik_telegram_last_error',
-						   $errmsg.' ('.date(DATE_RFC2822).')');
+		));
 	}
 }
