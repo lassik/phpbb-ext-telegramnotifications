@@ -57,11 +57,6 @@ class main_listener implements EventSubscriberInterface
 	 */
 	public function handle_submit_post_end($event)
 	{
-		if (($event['mode'] === 'edit') &&
-			empty($event['data']['post_edit_reason']))
-		{
-			return;
-		}
 		$url = generate_board_url().'/'.
 			 preg_replace('/^\.\//', '', html_entity_decode($event['url']));
 		$html = '['.htmlspecialchars($event['username']).'] '.
@@ -69,6 +64,15 @@ class main_listener implements EventSubscriberInterface
 			  '<a href="'.htmlspecialchars($url).'">'.
 			  $event['data']['topic_title'].
 			  '</a>';
+		if ($event['mode'] === 'edit')
+		{
+			$reason = $event['data']['post_edit_reason'];
+			if (empty($reason))
+			{
+				return;
+			}
+			$html .= ' - '.htmlspecialchars($reason);
+		}
 		$this->send_html_message_as_telegram_bot($html);
 	}
 
