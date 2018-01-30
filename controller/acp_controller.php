@@ -26,9 +26,10 @@ class acp_controller
 	/** @var phpbb\request\request_interface */
 	protected $request;
 
-	private $config_vars = array(
+	private $string_vars = array(
 		'lassik_telegram_bot_auth_token',
-		'lassik_telegram_chat_id');
+		'lassik_telegram_chat_id',
+	);
 
 	/**
 	 * Constructor
@@ -59,7 +60,7 @@ class acp_controller
 	 */
 	public function display_settings()
 	{
-		foreach ($this->config_vars as $var)
+		foreach ($this->string_vars as $var)
 		{
 			$this->template->assign_var(strtoupper($var), $this->config[$var]);
 		}
@@ -73,7 +74,7 @@ class acp_controller
 	 */
 	public function submit_settings()
 	{
-		foreach ($this->config_vars as $var)
+		foreach ($this->string_vars as $var)
 		{
 			$this->config->set($var, $this->request->variable($var, ''));
 		}
