@@ -14,14 +14,22 @@ class functions
 	/* @var \phpbb\controller\helper */
 	protected $config;
 
+	/** @var \phpbb\language\language */
+	protected $language;
+
 	/**
 	 * Constructor
 	 *
-	 * @param \phpbb\config\config	$config
+	 * @param \phpbb\config\config		$config
+	 * @param \phpbb\language\language	$language
 	 */
-	public function __construct(\phpbb\config\config $config)
+	public function __construct(
+		\phpbb\config\config		$config,
+		\phpbb\language\language	$language
+	)
 	{
-		$this->config = $config;
+		$this->config	= $config;
+		$this->language	= $language;
 	}
 
 	/**

@@ -11,6 +11,7 @@ services:
     class: lassik\telegramnotifications\core\functions
     arguments:
       - '@config'
+      - '@language'
   lassik.telegramnotifications.listener:
     class: lassik\telegramnotifications\event\main_listener
     arguments:
