@@ -2,7 +2,7 @@
 /**
  *
  * @package phpBB extension - Telegram notifications
- * @copyright (c) 2017 Lassi Kortela
+ * @copyright (c) 2017, 2018 Lassi Kortela
  * @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
  *
  */
@@ -57,6 +57,11 @@ class main_listener implements EventSubscriberInterface
 	 */
 	public function handle_submit_post_end($event)
 	{
+		if (($event['mode'] === 'edit') &&
+			empty($event['data']['post_edit_reason']))
+		{
+			return;
+		}
 		$url = generate_board_url().'/'.
 			 preg_replace('/^\.\//', '', html_entity_decode($event['url']));
 		$html = '['.htmlspecialchars($event['username']).'] '.
