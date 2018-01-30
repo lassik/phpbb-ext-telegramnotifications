@@ -17,6 +17,8 @@ class functions
 	/** @var \phpbb\language\language */
 	protected $language;
 
+	const MAX_EXTRA_LEN = 200;
+
 	/**
 	 * Constructor
 	 *
@@ -217,6 +219,9 @@ class functions
 			  '</a>';
 		if (!empty($extra))
 		{
+			if (strlen($extra) > self::MAX_EXTRA_LEN) {
+				$extra = substr($extra, 0, self::MAX_EXTRA_LEN).' [...]';
+			}
 			$html .= ' - '.htmlspecialchars($extra);
 		}
 		$this->send_html_message_as_telegram_bot($html);
