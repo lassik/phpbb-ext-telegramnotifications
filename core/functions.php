@@ -119,4 +119,15 @@ class functions
 		}
 		return $ans;
 	}
+
+	public function get_username_by_id($user_id)
+	{
+		global $db;
+		$sql = 'SELECT username FROM '.USERS_TABLE.' WHERE '.
+			 $db->sql_build_array('SELECT', array('user_id' => $user_id));
+		$result = $db->sql_query($sql);
+		$username = $db->sql_fetchfield('username');
+		$db->sql_freeresult($result);
+		return $username;
+	}
 }

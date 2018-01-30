@@ -57,14 +57,21 @@ class main_listener implements EventSubscriberInterface
 	 */
 	public function handle_submit_post_end($event)
 	{
+		$mode = $event['mode'];
+		$username = $event['username'];
+		if ($mode === 'edit')
+		{
+			$username = $this->functions->get_username_by_id(
+				$event['data']['post_edit_user']);
+		}
 		$url = generate_board_url().'/'.
 			 preg_replace('/^\.\//', '', html_entity_decode($event['url']));
-		$html = '['.htmlspecialchars($event['username']).'] '.
-			  htmlspecialchars($this->prefix_from_mode($event['mode'])).
+		$html = '['.htmlspecialchars($username).'] '.
+			  htmlspecialchars($this->prefix_from_mode($mode)).
 			  '<a href="'.htmlspecialchars($url).'">'.
 			  $event['data']['topic_title'].
 			  '</a>';
-		if ($event['mode'] === 'edit')
+		if ($mode === 'edit')
 		{
 			$reason = $event['data']['post_edit_reason'];
 			if (empty($reason))
