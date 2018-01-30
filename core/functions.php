@@ -30,6 +30,7 @@ class functions
 	{
 		$this->config	= $config;
 		$this->language	= $language;
+		$this->language->add_lang('telegram', 'lassik/telegramnotifications');
 	}
 
 	/**
@@ -167,19 +168,21 @@ class functions
 	 * return a human-readable string (like an email subject prefix)
 	 * that indicates what happened to the topic.
 	 */
-	public function prefix_from_mode($mode)
+	public function prefix_for_post_mode($mode, $username)
 	{
-		if ($mode === 'post')
+		$verbose = $this->get_bool_config_var('lassik_telegram_verbose');
+		$langprefix = $verbose ? 'TELEGRAM_VERBOSE_' : 'TELEGRAM_BRIEF_';
+		$langvar = $langprefix.strtoupper($mode);
+		$what = $this->language->lang($langvar);
+		$what = ($what == $langvar) ? '' : $what;
+		$what = empty($what) ? '' : $what.': ';
+		if ($verbose)
 		{
-			return '';
-		}
-		else if ($mode === 'reply')
-		{
-			return 'Re: ';
+			return $username.' '.$what;
 		}
 		else
 		{
-			return ucfirst($mode).': ';
+			return '['.$username.'] '.$what;
 		}
 	}
 
@@ -201,8 +204,7 @@ class functions
 		{
 			return;
 		}
-		$html = '['.htmlspecialchars($username).'] '.
-			  htmlspecialchars($this->prefix_from_mode($mode)).
+		$html = htmlspecialchars($this->prefix_for_post_mode($mode, $username)).
 			  '<a href="'.htmlspecialchars($url).'">'.
 			  htmlspecialchars($title).
 			  '</a>';
