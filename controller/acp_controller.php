@@ -59,6 +59,9 @@ class acp_controller
 	{
 		add_form_key('lassik/telegramnotifications');
 
+		$varnames = array('lassik_telegram_bot_auth_token',
+						  'lassik_telegram_chat_id');
+
 		if ($this->request->is_set_post('submit'))
 		{
 			if (!check_form_key('lassik/telegramnotifications'))
@@ -66,15 +69,10 @@ class acp_controller
 				trigger_error('FORM_INVALID');
 			}
 
-			$this->config->set('lassik_telegram_bot_auth_token',
-							   $this->request->variable(
-								   'lassik_telegram_bot_auth_token',
-								   ''));
-
-			$this->config->set('lassik_telegram_chat_id',
-							   $this->request->variable(
-								   'lassik_telegram_chat_id',
-								   ''));
+			foreach ($varnames as $var)
+			{
+				$this->config->set($var, $this->request->variable($var, ''));
+			}
 
 			$this->config->set('lassik_telegram_last_error', '');
 
@@ -82,19 +80,18 @@ class acp_controller
 						  adm_back_link($this->u_action));
 		}
 
-		$this->template->assign_vars(array(
+		$tvars = array(
 			'U_ACTION' =>
 			$u_action,
 
-			'LASSIK_TELEGRAM_BOT_AUTH_TOKEN' =>
-			$this->config['lassik_telegram_bot_auth_token'],
-
-			'LASSIK_TELEGRAM_CHAT_ID' =>
-			$this->config['lassik_telegram_chat_id'],
-
 			'LASSIK_TELEGRAM_LAST_ERROR' =>
-			$this->config['lassik_telegram_last_error'],
-		));
+			$this->config['lassik_telegram_last_error']
+		);
+		foreach ($varnames as $var)
+		{
+			$tvars[strtoupper($var)] = $this->config[$var];
+		}
+		$this->template->assign_vars($tvars);
 	}
 
 	/**
