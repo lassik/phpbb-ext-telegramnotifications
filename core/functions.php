@@ -175,6 +175,20 @@ class functions
 		}
 	}
 
+	public function notify_about_post($url, $username, $mode, $title, $extra)
+	{
+		$html = '['.htmlspecialchars($username).'] '.
+			  htmlspecialchars($this->prefix_from_mode($mode)).
+			  '<a href="'.htmlspecialchars($url).'">'.
+			  htmlspecialchars($title).
+			  '</a>';
+		if (!empty($extra))
+		{
+			$html .= ' - '.htmlspecialchars($extra);
+		}
+		$this->send_html_message_as_telegram_bot($html);
+	}
+
 	private function get_string_from_db($table, $wanted_column, $where)
 	{
 		global $db;

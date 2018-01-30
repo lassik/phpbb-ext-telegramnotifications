@@ -57,29 +57,23 @@ class main_listener implements EventSubscriberInterface
 	 */
 	public function handle_submit_post_end($event)
 	{
-		$mode = $event['mode'];
+		$url = generate_board_url().'/'.
+			 preg_replace('/^\.\//', '', html_entity_decode($event['url']));
 		$username = $event['username'];
+		$mode = $event['mode'];
+		$title = html_entity_decode($event['data']['topic_title']);
+		$extra = '';
 		if ($mode === 'edit')
 		{
 			$username = $this->functions->get_username_by_id(
 				$event['data']['post_edit_user']);
-		}
-		$url = generate_board_url().'/'.
-			 preg_replace('/^\.\//', '', html_entity_decode($event['url']));
-		$html = '['.htmlspecialchars($username).'] '.
-			  htmlspecialchars($this->functions->prefix_from_mode($mode)).
-			  '<a href="'.htmlspecialchars($url).'">'.
-			  $event['data']['topic_title'].
-			  '</a>';
-		if ($mode === 'edit')
-		{
-			$reason = $event['data']['post_edit_reason'];
-			if (empty($reason))
+			$extra = $event['data']['post_edit_reason'];
+			if (empty($extra))
 			{
 				return;
 			}
-			$html .= ' - '.htmlspecialchars($reason);
 		}
-		$this->functions->send_html_message_as_telegram_bot($html);
+		$this->functions->notify_about_post(
+			$url, $username, $mode, $title, $extra);
 	}
 }
