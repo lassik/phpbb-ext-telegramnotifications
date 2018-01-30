@@ -183,8 +183,24 @@ class functions
 		}
 	}
 
+	private function should_notify_about_post_mode($mode)
+	{
+		switch ($mode) {
+		case 'post':	$var = 'lassik_telegram_notify_topic'; break;
+		case 'reply':	$var = 'lassik_telegram_notify_reply'; break;
+		case 'quote':	$var = 'lassik_telegram_notify_reply'; break;
+		case 'edit':	$var = 'lassik_telegram_notify_edit';  break;
+		default:        return false;
+		}
+		return $this->get_bool_config_var($var);
+	}
+
 	public function notify_about_post($url, $username, $mode, $title, $extra)
 	{
+		if (!$this->should_notify_about_post_mode($mode))
+		{
+			return;
+		}
 		$html = '['.htmlspecialchars($username).'] '.
 			  htmlspecialchars($this->prefix_from_mode($mode)).
 			  '<a href="'.htmlspecialchars($url).'">'.
