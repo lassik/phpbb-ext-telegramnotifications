@@ -207,6 +207,12 @@ class functions
 		return $this->get_bool_config_var($var);
 	}
 
+	private function should_show_extra($mode)
+	{
+		return (($mode === 'edit') ||
+				$this->get_bool_config_var('lassik_telegram_include_text'));
+	}
+
 	public function notify_about_post($url, $username, $mode, $title, $extra)
 	{
 		if (!$this->should_notify_about_post_mode($mode))
@@ -217,7 +223,7 @@ class functions
 			  '<a href="'.htmlspecialchars($url).'">'.
 			  htmlspecialchars($title).
 			  '</a>';
-		if (!empty($extra))
+		if (!empty($extra) && $this->should_show_extra($mode))
 		{
 			if (strlen($extra) > self::MAX_EXTRA_LEN) {
 				$extra = substr($extra, 0, self::MAX_EXTRA_LEN).' [...]';

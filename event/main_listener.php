@@ -75,7 +75,6 @@ class main_listener implements EventSubscriberInterface
 		$username = $event['username'];
 		$mode = $event['mode'];
 		$title = html_entity_decode($event['data']['topic_title']);
-		$extra = '';
 		if ($mode === 'edit')
 		{
 			$username = $this->functions->get_username_by_id(
@@ -85,6 +84,12 @@ class main_listener implements EventSubscriberInterface
 			{
 				return;
 			}
+		}
+		else
+		{
+			$extra = $event['data']['message'];
+			$extra = html_entity_decode($extra);
+			$extra = strip_tags($extra);
 		}
 		$this->functions->notify_about_post(
 			$url, $username, $mode, $title, $extra);
