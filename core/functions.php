@@ -163,6 +163,16 @@ class functions
 		return $ans;
 	}
 
+	private function translation($mode, $verbose)
+	{
+		$langprefix = $verbose ? 'TELEGRAM_VERBOSE_' : 'TELEGRAM_BRIEF_';
+		$langvar = $langprefix.strtoupper($mode);
+		$what = $this->language->lang($langvar);
+		$what = ($what == $langvar) ? '' : $what;
+		$what = empty($what) ? '' : $what;
+		return $what;
+	}
+
 	/**
 	 * Given a phpBB event mode string (post, reply, quote, edit),
 	 * return a human-readable string (like an email subject prefix)
@@ -171,10 +181,7 @@ class functions
 	public function prefix_for_post_mode($mode, $username)
 	{
 		$verbose = $this->get_bool_config_var('lassik_telegram_verbose');
-		$langprefix = $verbose ? 'TELEGRAM_VERBOSE_' : 'TELEGRAM_BRIEF_';
-		$langvar = $langprefix.strtoupper($mode);
-		$what = $this->language->lang($langvar);
-		$what = ($what == $langvar) ? '' : $what;
+		$what = $this->translation($mode, $verbose);
 		$what = empty($what) ? '' : $what.': ';
 		if ($verbose)
 		{
