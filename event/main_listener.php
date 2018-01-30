@@ -115,12 +115,12 @@ class main_listener implements EventSubscriberInterface
 	 *
 	 * The Telegram bot's auth token as well as the target chat ID are
 	 * retrieved from the phpBB configuration. Note that group chat
-	 * IDs are negative numbers. The function will silently fail
-	 * unless both configuration parameters are set.
+	 * IDs are negative numbers. The function will fail unless both
+	 * configuration parameters are set.
 	 *
 	 * PHP's curl API is used to make a HTTPS connection to the
-	 * Telegram API. The function will silently fail if curl support
-	 * is not available.
+	 * Telegram API. The function will fail if curl support is not
+	 * available.
 	 */
 	private function send_html_message_as_telegram_bot($html)
 	{
