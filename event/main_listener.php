@@ -31,22 +31,16 @@ class main_listener implements EventSubscriberInterface
 	/** @var \lassik\telegramnotifications\core\functions */
 	protected $functions;
 
-	/** @var \phpbb\config\config */
-	protected $config;
-
 	/**
 	 * Constructor
 	 *
-	 * @param \lassik\telegramnotifications\core\functions	$functions
-	 * @param \phpbb\config\config							$config
+	 * @param \lassik\telegramnotifications\core\functions $functions
 	 */
 	public function __construct(
-		\lassik\telegramnotifications\core\functions $functions,
-		\phpbb\config\config $config
+		\lassik\telegramnotifications\core\functions $functions
 	)
 	{
 		$this->functions = $functions;
-		$this->config	 = $config;
 	}
 
 	/**
