@@ -76,8 +76,7 @@ class acp_controller
 		foreach ($this->bool_vars as $var)
 		{
 			$this->template->assign_var(
-				strtoupper($var),
-				(((string)($this->config[$var])) === '1'));
+				strtoupper($var), $this->functions->get_bool_config_var($var));
 		}
 		$this->template->assign_var(
 			'LASSIK_TELEGRAM_LAST_ERROR',

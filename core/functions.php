@@ -197,6 +197,11 @@ class functions
 		$this->send_html_message_as_telegram_bot($html);
 	}
 
+	public function get_bool_config_var($var)
+	{
+		return (((string)($this->config[$var])) === '1');
+	}
+
 	private function get_string_from_db($table, $wanted_column, $where)
 	{
 		global $db;
