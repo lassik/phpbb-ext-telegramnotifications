@@ -154,6 +154,27 @@ class functions
 		return $ans;
 	}
 
+	/**
+	 * Given a phpBB event mode string (post, reply, quote, edit),
+	 * return a human-readable string (like an email subject prefix)
+	 * that indicates what happened to the topic.
+	 */
+	public function prefix_from_mode($mode)
+	{
+		if ($mode === 'post')
+		{
+			return '';
+		}
+		else if ($mode === 'reply')
+		{
+			return 'Re: ';
+		}
+		else
+		{
+			return ucfirst($mode).': ';
+		}
+	}
+
 	private function get_string_from_db($table, $wanted_column, $where)
 	{
 		global $db;

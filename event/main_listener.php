@@ -67,7 +67,7 @@ class main_listener implements EventSubscriberInterface
 		$url = generate_board_url().'/'.
 			 preg_replace('/^\.\//', '', html_entity_decode($event['url']));
 		$html = '['.htmlspecialchars($username).'] '.
-			  htmlspecialchars($this->prefix_from_mode($mode)).
+			  htmlspecialchars($this->functions->prefix_from_mode($mode)).
 			  '<a href="'.htmlspecialchars($url).'">'.
 			  $event['data']['topic_title'].
 			  '</a>';
@@ -81,26 +81,5 @@ class main_listener implements EventSubscriberInterface
 			$html .= ' - '.htmlspecialchars($reason);
 		}
 		$this->functions->send_html_message_as_telegram_bot($html);
-	}
-
-	/**
-	 * Given a phpBB event mode string (post, reply, quote, edit),
-	 * return a human-readable string (like an email subject prefix)
-	 * that indicates what happened to the topic.
-	 */
-	private function prefix_from_mode($mode)
-	{
-		if ($mode === 'post')
-		{
-			return '';
-		}
-		else if ($mode === 'reply')
-		{
-			return 'Re: ';
-		}
-		else
-		{
-			return ucfirst($mode).': ';
-		}
 	}
 }
