@@ -154,14 +154,20 @@ class functions
 		return $ans;
 	}
 
-	public function get_username_by_id($user_id)
+	private function get_string_from_db($table, $wanted_column, $where)
 	{
 		global $db;
-		$sql = 'SELECT username FROM '.USERS_TABLE.' WHERE '.
-			 $db->sql_build_array('SELECT', array('user_id' => $user_id));
+		$sql = 'SELECT '.$wanted_column.' FROM '.$table.' WHERE '.
+			 $db->sql_build_array('SELECT', $where);
 		$result = $db->sql_query($sql);
-		$username = $db->sql_fetchfield('username');
+		$ans = $db->sql_fetchfield($wanted_column);
 		$db->sql_freeresult($result);
-		return $username;
+		return $ans;
+	}
+
+	public function get_username_by_id($user_id)
+	{
+		return $this->get_string_from_db(
+			USERS_TABLE, 'username', array('user_id' => $user_id));
 	}
 }
