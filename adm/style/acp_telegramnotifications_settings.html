@@ -20,6 +20,66 @@
 			<dd>{LASSIK_TELEGRAM_LAST_ERROR}</dd>
 		</dl>
 	</fieldset>
+	<fieldset>
+		<legend>{L_ACP_TELEGRAM_NOTIFY_ABOUT}</legend>
+		<dl>
+			<dt><label for="lassik_telegram_notify_user">{L_ACP_TELEGRAM_NOTIFY_USER}{L_COLON}</label></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="lassik_telegram_notify_user"
+							  <!-- IF LASSIK_TELEGRAM_NOTIFY_USER --> checked="checked" <!-- ENDIF --> value="1"> {L_YES}</label>
+				<label><input type="radio" class="radio" name="lassik_telegram_notify_user"
+							  <!-- IF not LASSIK_TELEGRAM_NOTIFY_USER --> checked="checked" <!-- ENDIF --> value="0"> {L_NO}</label>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label for="lassik_telegram_notify_topic">{L_ACP_TELEGRAM_NOTIFY_TOPIC}{L_COLON}</label></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="lassik_telegram_notify_topic"
+							  <!-- IF LASSIK_TELEGRAM_NOTIFY_TOPIC --> checked="checked" <!-- ENDIF --> value="1"> {L_YES}</label>
+				<label><input type="radio" class="radio" name="lassik_telegram_notify_topic"
+							  <!-- IF not LASSIK_TELEGRAM_NOTIFY_TOPIC --> checked="checked" <!-- ENDIF --> value="0"> {L_NO}</label>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label for="lassik_telegram_notify_reply">{L_ACP_TELEGRAM_NOTIFY_REPLY}{L_COLON}</label></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="lassik_telegram_notify_reply"
+							  <!-- IF LASSIK_TELEGRAM_NOTIFY_REPLY --> checked="checked" <!-- ENDIF --> value="1"> {L_YES}</label>
+				<label><input type="radio" class="radio" name="lassik_telegram_notify_reply"
+							  <!-- IF not LASSIK_TELEGRAM_NOTIFY_REPLY --> checked="checked" <!-- ENDIF --> value="0"> {L_NO}</label>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label for="lassik_telegram_notify_edit">{L_ACP_TELEGRAM_NOTIFY_EDIT}{L_COLON}</label></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="lassik_telegram_notify_edit"
+							  <!-- IF LASSIK_TELEGRAM_NOTIFY_EDIT --> checked="checked" <!-- ENDIF --> value="1"> {L_YES}</label>
+				<label><input type="radio" class="radio" name="lassik_telegram_notify_edit"
+							  <!-- IF not LASSIK_TELEGRAM_NOTIFY_EDIT --> checked="checked" <!-- ENDIF --> value="0"> {L_NO}</label>
+			</dd>
+		</dl>
+	</fieldset>
+	<fieldset>
+		<legend>{L_ACP_TELEGRAM_NOTIFY_CONTENT}</legend>
+		<dl>
+			<dt><label for="lassik_telegram_verbose">{L_ACP_TELEGRAM_VERBOSE}{L_COLON}</label></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="lassik_telegram_verbose"
+							  <!-- IF LASSIK_TELEGRAM_VERBOSE --> checked="checked" <!-- ENDIF --> value="1"> {L_YES}</label>
+				<label><input type="radio" class="radio" name="lassik_telegram_verbose"
+							  <!-- IF not LASSIK_TELEGRAM_VERBOSE --> checked="checked" <!-- ENDIF --> value="0"> {L_NO}</label>
+			</dd>
+		</dl>
+		<dl>
+			<dt><label for="lassik_telegram_include_text">{L_ACP_TELEGRAM_INCLUDE_TEXT}{L_COLON}</label></dt>
+			<dd>
+				<label><input type="radio" class="radio" name="lassik_telegram_include_text"
+							  <!-- IF LASSIK_TELEGRAM_INCLUDE_TEXT --> checked="checked" <!-- ENDIF --> value="1"> {L_YES}</label>
+				<label><input type="radio" class="radio" name="lassik_telegram_include_text"
+							  <!-- IF not LASSIK_TELEGRAM_INCLUDE_TEXT --> checked="checked" <!-- ENDIF --> value="0"> {L_NO}</label>
+			</dd>
+		</dl>
+	</fieldset>
 	<fieldset class="submit-buttons">
 		<legend>Submit</legend>
 		<input class="button1" type="submit" id="submit" name="submit"

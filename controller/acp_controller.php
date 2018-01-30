@@ -31,6 +31,15 @@ class acp_controller
 		'lassik_telegram_chat_id',
 	);
 
+	private $bool_vars = array(
+		'lassik_telegram_notify_user',
+		'lassik_telegram_notify_topic',
+		'lassik_telegram_notify_reply',
+		'lassik_telegram_notify_edit',
+		'lassik_telegram_verbose',
+		'lassik_telegram_include_text',
+	);
+
 	/**
 	 * Constructor
 	 *
@@ -64,6 +73,12 @@ class acp_controller
 		{
 			$this->template->assign_var(strtoupper($var), $this->config[$var]);
 		}
+		foreach ($this->bool_vars as $var)
+		{
+			$this->template->assign_var(
+				strtoupper($var),
+				(((string)($this->config[$var])) === '1'));
+		}
 		$this->template->assign_var(
 			'LASSIK_TELEGRAM_LAST_ERROR',
 			$this->config['lassik_telegram_last_error']);
@@ -77,6 +92,11 @@ class acp_controller
 		foreach ($this->string_vars as $var)
 		{
 			$this->config->set($var, $this->request->variable($var, ''));
+		}
+		foreach ($this->bool_vars as $var)
+		{
+			$this->config->set(
+				$var, ($this->request->variable($var, '') === '1') ? '1' : '0');
 		}
 		$this->config->set('lassik_telegram_last_error', '');
 	}
