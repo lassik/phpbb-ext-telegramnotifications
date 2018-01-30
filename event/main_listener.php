@@ -25,6 +25,7 @@ class main_listener implements EventSubscriberInterface
 	{
 		return array(
 			'core.submit_post_end' => 'handle_submit_post_end',
+			'core.user_active_flip_after' => 'handle_user_active_flip_after',
 		);
 	}
 
@@ -41,6 +42,24 @@ class main_listener implements EventSubscriberInterface
 	)
 	{
 		$this->functions = $functions;
+	}
+
+	/**
+	 * Handle phpBB's ucp_activate_after by sending a Telegram
+	 * message that says which user was activated.
+	 *
+	 * @param Event $event
+	 */
+	public function handle_user_active_flip_after($event)
+	{
+		if (!$event['activated'])
+		{
+			return;
+		}
+		/* TODO: Notify about all activated users when there's more than one. */
+		$username = $this->functions->get_username_by_id(
+			$event['user_id_ary'][0]);
+		$this->functions->notify_about_user_activation($username);
 	}
 
 	/**

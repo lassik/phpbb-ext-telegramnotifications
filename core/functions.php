@@ -222,6 +222,14 @@ class functions
 		$this->send_html_message_as_telegram_bot($html);
 	}
 
+	public function notify_about_user_activation($username)
+	{
+		$what = $this->translation(
+			'user', $this->get_bool_config_var('lassik_telegram_verbose'));
+		$this->send_html_message_as_telegram_bot(htmlspecialchars(
+			$what.': '.$username));
+	}
+
 	public function get_bool_config_var($var)
 	{
 		return (((string)($this->config[$var])) === '1');
