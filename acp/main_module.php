@@ -23,12 +23,33 @@ class main_module
 	 */
 	public function main($id, $mode)
 	{
-		global $phpbb_container;
+		global $phpbb_container, $request, $template, $user;
 
+		$user->add_lang('acp/common');
 		$this->tpl_name = 'acp_telegramnotifications_' . strtolower($mode);
 		$this->page_title = 'ACP_TELEGRAM_' . strtoupper($mode);
+		$form_key = 'lassik/telegramnotifications';
 		$controller = $phpbb_container->get(
 			'lassik.telegramnotifications.acp.controller');
-		$controller->$mode($this->u_action);
+
+		if ($request->is_set_post('submit'))
+		{
+			if (!check_form_key($form_key))
+			{
+				trigger_error('FORM_INVALID');
+			}
+			$func = 'submit_' . $mode;
+			$controller->$func();
+			trigger_error(
+				$user->lang('ACP_TELEGRAM_SETTINGS_UPDATED') .
+				adm_back_link($u_action));
+		}
+		else
+		{
+			add_form_key($form_key);
+			$template->assign_var('U_ACTION', $u_action);
+			$func = 'display_' . $mode;
+			$controller->$func();
+		}
 	}
 }

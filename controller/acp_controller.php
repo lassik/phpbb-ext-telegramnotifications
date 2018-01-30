@@ -26,6 +26,10 @@ class acp_controller
 	/** @var phpbb\request\request_interface */
 	protected $request;
 
+	private $config_vars = array(
+		'lassik_telegram_bot_auth_token',
+		'lassik_telegram_chat_id');
+
 	/**
 	 * Constructor
 	 *
@@ -51,92 +55,53 @@ class acp_controller
 	}
 
 	/**
-	 * Handle the "Telegram settings" ACP page.
-	 *
-	 * @param string $u_action
+	 * Save settings from the "Telegram settings" ACP page.
 	 */
-	public function settings($u_action)
+	public function submit_settings()
 	{
-		add_form_key('lassik/telegramnotifications');
-
-		$varnames = array('lassik_telegram_bot_auth_token',
-						  'lassik_telegram_chat_id');
-
-		if ($this->request->is_set_post('submit'))
+		foreach ($this->config_vars as $var)
 		{
-			if (!check_form_key('lassik/telegramnotifications'))
-			{
-				trigger_error('FORM_INVALID');
-			}
-
-			foreach ($varnames as $var)
-			{
-				$this->config->set($var, $this->request->variable($var, ''));
-			}
-
-			$this->config->set('lassik_telegram_last_error', '');
-
-			trigger_error($this->language->lang('ACP_TELEGRAM_SETTINGS_UPDATED') .
-						  adm_back_link($this->u_action));
+			$this->config->set($var, $this->request->variable($var, ''));
 		}
-
-		$tvars = array(
-			'U_ACTION' =>
-			$u_action,
-
-			'LASSIK_TELEGRAM_LAST_ERROR' =>
-			$this->config['lassik_telegram_last_error']
-		);
-		foreach ($varnames as $var)
-		{
-			$tvars[strtoupper($var)] = $this->config[$var];
-		}
-		$this->template->assign_vars($tvars);
+		$this->config->set('lassik_telegram_last_error', '');
 	}
 
 	/**
-	 * Handle the "Find chat ID" ACP page.
-	 *
-	 * @param string $u_action
+	 * Display the "Telegram settings" ACP page.
 	 */
-	public function find_chat_id($u_action)
+	public function display_settings()
 	{
-		add_form_key('lassik/telegramnotifications');
-
-		if ($this->request->is_set_post('submit'))
+		foreach ($this->config_vars as $var)
 		{
-			if (!check_form_key('lassik/telegramnotifications'))
-			{
-				trigger_error('FORM_INVALID');
-			}
-
-			$this->config->set('lassik_telegram_chat_id',
-							   $this->request->variable(
-								   'lassik_telegram_chat_id',
-								   ''));
-
-			$this->config->set('lassik_telegram_last_error', '');
-
-			trigger_error($this->language->lang('ACP_TELEGRAM_SETTINGS_UPDATED') .
-						  adm_back_link($this->u_action));
+			$this->template->assign_var(strtoupper($var), $this->config[$var]);
 		}
+		$this->template->assign_var(
+			'LASSIK_TELEGRAM_LAST_ERROR',
+			$this->config['lassik_telegram_last_error']);
+	}
 
+	/**
+	 * Save settings from the "Find chat ID" ACP page.
+	 */
+	public function submit_find_chat_id()
+	{
+		$this->config->set(
+			'lassik_telegram_chat_id',
+			$this->request->variable('lassik_telegram_chat_id', ''));
+		$this->config->set('lassik_telegram_last_error', '');
+	}
+
+	/**
+	 * Display the "Find chat ID" ACP page.
+	 */
+	public function display_find_chat_id()
+	{
 		list($chat_id, $chat_desc) = $this->functions->parse_chat_id(
 			$this->functions->call_telegram_bot_api('getUpdates', array()));
-
-		$this->template->assign_vars(array(
-			'U_ACTION' =>
-			$u_action,
-
-			'LASSIK_TELEGRAM_CHAT_ID' =>
-			$chat_id,
-
-			'LASSIK_TELEGRAM_CHAT_DESC' =>
-			$chat_desc,
-
-			'LASSIK_TELEGRAM_LAST_ERROR' =>
-			$this->config['lassik_telegram_last_error'],
-
-		));
+		$this->template->assign_var('LASSIK_TELEGRAM_CHAT_ID', $chat_id);
+		$this->template->assign_var('LASSIK_TELEGRAM_CHAT_DESC', $chat_desc);
+		$this->template->assign_var(
+			'LASSIK_TELEGRAM_LAST_ERROR',
+			$this->config['lassik_telegram_last_error']);
 	}
 }
