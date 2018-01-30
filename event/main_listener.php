@@ -61,7 +61,7 @@ class main_listener implements EventSubscriberInterface
 		{
 			$username = $this->functions->get_username_by_id(
 				$event['data']['post_edit_user']);
-			$extra = $event['data']['post_edit_reason'];
+			$extra = html_entity_decode($event['data']['post_edit_reason']);
 			if (empty($extra))
 			{
 				return;
