@@ -109,9 +109,9 @@ class functions
 		if (empty($chat_id))
 		{
 			$this->set_last_error('Telegram chat ID not filled in');
-			return;
+			return NULL;
 		}
-		$this->call_telegram_bot_api('sendMessage', array(
+		return $this->call_telegram_bot_api('sendMessage', array(
 			'chat_id' => $chat_id,
 			'disable_web_page_preview' => 'true',
 			'parse_mode' => 'HTML',
