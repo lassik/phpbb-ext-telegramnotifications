@@ -55,18 +55,6 @@ class acp_controller
 	}
 
 	/**
-	 * Save settings from the "Telegram settings" ACP page.
-	 */
-	public function submit_settings()
-	{
-		foreach ($this->config_vars as $var)
-		{
-			$this->config->set($var, $this->request->variable($var, ''));
-		}
-		$this->config->set('lassik_telegram_last_error', '');
-	}
-
-	/**
 	 * Display the "Telegram settings" ACP page.
 	 */
 	public function display_settings()
@@ -81,13 +69,14 @@ class acp_controller
 	}
 
 	/**
-	 * Save settings from the "Find chat ID" ACP page.
+	 * Save settings from the "Telegram settings" ACP page.
 	 */
-	public function submit_find_chat_id()
+	public function submit_settings()
 	{
-		$this->config->set(
-			'lassik_telegram_chat_id',
-			$this->request->variable('lassik_telegram_chat_id', ''));
+		foreach ($this->config_vars as $var)
+		{
+			$this->config->set($var, $this->request->variable($var, ''));
+		}
 		$this->config->set('lassik_telegram_last_error', '');
 	}
 
@@ -103,5 +92,16 @@ class acp_controller
 		$this->template->assign_var(
 			'LASSIK_TELEGRAM_LAST_ERROR',
 			$this->config['lassik_telegram_last_error']);
+	}
+
+	/**
+	 * Save settings from the "Find chat ID" ACP page.
+	 */
+	public function submit_find_chat_id()
+	{
+		$this->config->set(
+			'lassik_telegram_chat_id',
+			$this->request->variable('lassik_telegram_chat_id', ''));
+		$this->config->set('lassik_telegram_last_error', '');
 	}
 }
